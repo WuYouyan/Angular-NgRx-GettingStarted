@@ -20,9 +20,9 @@ const initialState: ProductState = {
 
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
 
-const getShowProductCode = createSelector(getProductFeatureState, state => state.showProductCode);
-const getCurrentProduct = createSelector(getProductFeatureState, state => state.currentProduct);
-const getProducts = createSelector(getProductFeatureState, state => state.products);
+export const getShowProductCode = createSelector(getProductFeatureState, state => state.showProductCode);
+export const getCurrentProduct = createSelector(getProductFeatureState, state => state.currentProduct);
+export const getProducts = createSelector(getProductFeatureState, state => state.products);
 
 export const productReducer = createReducer<ProductState>(
     initialState,
