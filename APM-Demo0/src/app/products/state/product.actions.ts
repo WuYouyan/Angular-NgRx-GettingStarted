@@ -6,7 +6,7 @@ export const setCurrentProduct = createAction(
     '[Product List Page] Set Current Product',
     props<{ product: Product}>()
 );
-export const clreaCurrentProduuct = createAction('[Product Edit Page] Clear Current Product');
+export const clearCurrentProduct = createAction('[Product Edit Page] Clear Current Product');
 export const initCurrentProduct = createAction('[Product List Page] Init Current Product');
 export const loadProducts = createAction('[Product List Page] Load Products');
 export const loadProductsSuccess = createAction('[Product API] Load Success');

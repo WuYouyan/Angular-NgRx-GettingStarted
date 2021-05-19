@@ -1,4 +1,4 @@
-import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import * as AppState from "src/app/state/app.state";
 import * as ProductActions from "./product.actions";
 import { Product } from "../product";
@@ -42,7 +42,7 @@ export const productReducer = createReducer<ProductState>(
             currentProduct: action.product
         }
     }),
-    on(ProductActions.clreaCurrentProduuct, (state) : ProductState =>{
+    on(ProductActions.clearCurrentProduct, (state) : ProductState =>{
         console.log('original state: ' + JSON.stringify(state));
         return {
             ...state,
