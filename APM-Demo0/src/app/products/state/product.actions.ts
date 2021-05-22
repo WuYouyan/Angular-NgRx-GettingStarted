@@ -8,6 +8,7 @@ export const setCurrentProduct = createAction(
 );
 export const clearCurrentProduct = createAction('[Product Edit Page] Clear Current Product');
 export const initCurrentProduct = createAction('[Product List Page] Init Current Product');
-export const loadProducts = createAction('[Product List Page] Load Products');
-export const loadProductsSuccess = createAction('[Product API] Load Success');
-export const loadProductsFailure = createAction('[Product API] Load Fail');
+
+export const loadProducts = createAction('[Product] Load');
+export const loadProductsSuccess = createAction('[Product] Load Success', props<{products: Product[]}>());
+export const loadProductsFailure = createAction('[Product] Load Fail', props<{error: string}>());
