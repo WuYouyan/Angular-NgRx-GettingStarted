@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { getCurrentProduct, getShowProductCode, State } from '../state/product.reducer';
+import { getCurrentProduct, getProducts, getShowProductCode, State } from '../state/product.reducer';
 import * as ProductActions from "../state/product.actions";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pm-product-list',
@@ -21,6 +22,7 @@ export class ProductListComponent implements OnInit {
 
   // Used to highlight the selected product in the list
   selectedProduct: Product | null;
+  products$: Observable<Product[]>;
 
   constructor(
     private productService: ProductService,
@@ -32,11 +34,9 @@ export class ProductListComponent implements OnInit {
     this.store.select(getCurrentProduct).subscribe(
       currentProduct => this.selectedProduct = currentProduct
     );
+    this.products$ = this.store.select(getProducts)
 
-    this.productService.getProducts().subscribe({
-      next: (products: Product[]) => this.products = products,
-      error: err => this.errorMessage = err
-    });
+    this.store.dispatch(ProductActions.loadProducts());
     // TODO: Unsubscribe
     this.store.select(getShowProductCode).subscribe(showProductCode => this.displayCode = showProductCode);
   }
