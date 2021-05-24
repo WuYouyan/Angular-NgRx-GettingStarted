@@ -86,18 +86,46 @@ export const productReducer = createReducer<ProductState>(
     }),
     on(ProductActions.updateProductSuccess, (state, action) => {
         const updatedProducts = state.products.map(item => action.product.id === item.id ? action.product : item);
-      return {
-        ...state,
-        products: updatedProducts,
-        currentProductId: action.product.id,
-        error: ''
-      };
-  }),
-  on(ProductActions.updateProductFailure, (state, action) => {
-      return {
-        ...state,
-        error: action.error
-      };
-  })
-
+        return {
+            ...state,
+            products: updatedProducts,
+            currentProductId: action.product.id,
+            error: ''
+        };
+    }),
+    on(ProductActions.updateProductFailure, (state, action) => {
+        return {
+            ...state,
+            error: action.error
+        };
+    }),
+    on(ProductActions.createProductSuccess, (state, action) => {
+        return {
+            ...state,
+            products: [...state.products, action.product],
+            currentProductId: action.product.id,
+            error: ''
+        };
+    }),
+    on(ProductActions.createProductFailure, (state, action) => {
+        return {
+            ...state,
+            error: action.error
+        };
+    }),
+    on(ProductActions.deleteProductSuccess, (state, action) => {
+        const delectedProducts = state.products.filter(product => product.id !== action.productId);
+        return {
+            ...state,
+            products: delectedProducts,
+            currentProductId: null,
+            error: ''
+        };
+    }),
+    on(ProductActions.deleteProductFailure, (state, action) => {
+        return {
+            ...state,
+            error: action.error
+        };
+    }),
 );
