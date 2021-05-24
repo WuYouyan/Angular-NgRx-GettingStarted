@@ -7,7 +7,7 @@ import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 /* NgRx */
 import { Store } from '@ngrx/store';
-import { State, getCurrentProduct } from '../state/product.reducer';
+import { State, getCurrentProductById } from '../state/product.reducer';
 import * as ProductActions from "../state/product.actions";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -64,7 +64,7 @@ export class ProductEditComponent implements OnInit {
     });
 
     // Watch for changes to the currently selected product
-    this.product$ = this.store.select(getCurrentProduct).pipe(
+    this.product$ = this.store.select(getCurrentProductById).pipe(
       tap(product => this.displayProduct(product))
     );
 
@@ -132,12 +132,12 @@ export class ProductEditComponent implements OnInit {
 
         if (product.id === 0) {
           this.productService.createProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({product: p})),
+            next: p => this.store.dispatch(ProductActions.setCurrentProduct({currentProductId: p.id})),
             error: err => this.errorMessage = err
           });
         } else {
           this.productService.updateProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({product: p})),
+            next: p => this.store.dispatch(ProductActions.setCurrentProduct({currentProductId: p.id})),
             error: err => this.errorMessage = err
           });
         }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Product } from '../product';
-import { getCurrentProduct, getError, getProducts, getShowProductCode, State } from '../state/product.reducer';
+import { getCurrentProductById, getError, getProducts, getShowProductCode, State } from '../state/product.reducer';
 import * as ProductActions from "../state/product.actions";
 import { Observable } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.selectedProduct$ = this.store.select(getCurrentProduct);
+    this.selectedProduct$ = this.store.select(getCurrentProductById);
 
     this.products$ = this.store.select(getProducts);
 
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
   productSelected(product: Product): void {
     this.store.dispatch(
       ProductActions.setCurrentProduct(
-        { product }
+        { currentProductId: product.id }
       )
     );
   }
