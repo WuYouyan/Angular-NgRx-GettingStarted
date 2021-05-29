@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { Product } from '../product';
 import { getCurrentProductById, getError, getProducts, getShowProductCode, State } from '../state';
-import * as ProductActions from "../state/product.actions";
+import { ProductPageActions } from "../state/actions";
 import { Observable } from 'rxjs';
 
 @Component({
@@ -28,22 +28,22 @@ export class ProductShellComponent implements OnInit {
 
     this.errorMessage$ = this.store.select(getError);
 
-    this.store.dispatch(ProductActions.loadProducts());
+    this.store.dispatch(ProductPageActions.loadProducts());
 
     this.displayCode$ = this.store.select(getShowProductCode);
   }
 
   checkChanged(): void {
-    this.store.dispatch(ProductActions.toggleProductCode());
+    this.store.dispatch(ProductPageActions.toggleProductCode());
   }
 
   newProduct(): void {
-    this.store.dispatch(ProductActions.initCurrentProduct());
+    this.store.dispatch(ProductPageActions.initCurrentProduct());
   }
 
   productSelected(product: Product): void {
     this.store.dispatch(
-      ProductActions.setCurrentProduct(
+      ProductPageActions.setCurrentProduct(
         { currentProductId: product.id }
       )
     );
