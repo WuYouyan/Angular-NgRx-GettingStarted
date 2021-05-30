@@ -10,6 +10,10 @@
       (productWasSelected)="productSelected($any($event))"></pm-product-list>
   </div>
   <div class='col-md-8'>
-    <pm-product-edit></pm-product-edit>
+    <pm-product-edit
+      [selectedProduct]="selectedProduct$ | async"
+      [errorMessage]="errorMessage$ | async"
+      (onDelete)="deleteProduct($any($event))"
+      (onSave)="saveProduct($any($event))"></pm-product-edit>
   </div>
 </div>
